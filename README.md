@@ -1,18 +1,19 @@
 # Reload Tab Group
 
-A tiny Chrome extension that reloads every tab in the active tab group with one click.
+A tiny Chrome extension for reloading a tab group, copying all its URLs, or exporting them to a text file.
 
 ## Use
 
 1. Pin **Reload Tab Group** to the Chrome toolbar.
 2. Open any tab inside a tab group.
 3. Click the extension icon.
+4. Choose **Reload group**, **Copy all URLs**, or **Export all URLs**.
 
-The badge shows how many tabs were reloaded. If the active tab is not grouped, the extension does nothing and shows a dash.
+Export creates `tab-group-urls.txt` with one URL per line. Actions are disabled when the active tab is not grouped.
 
 ## Privacy and permissions
 
-The extension requests no permissions, collects no data, and makes no network requests. See [PRIVACY.md](PRIVACY.md).
+The extension requests the `tabs` permission only to read URLs from every tab in the active group for Copy and Export. URLs stay on the device; the extension collects no data and makes no network requests. See [PRIVACY.md](PRIVACY.md).
 
 ## Install from source
 

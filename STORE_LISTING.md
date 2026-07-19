@@ -3,31 +3,38 @@
 ## Product details
 
 - **Name:** Reload Tab Group
-- **Summary:** Reload every tab in the active Chrome tab group with one click. No tracking, data collection, or permissions.
+- **Summary:** Reload a tab group, copy all its URLs, or export them to a text file—locally, with no tracking.
 - **Category:** Tools
 - **Language:** English
 
 ## Detailed description
 
-Reload Tab Group gives you a fast, predictable way to refresh every tab in the group you are currently using.
+Reload Tab Group gives you a fast, predictable way to manage every tab in the group you are currently using.
 
-Open a grouped tab and click the extension icon. Every tab in that group reloads immediately, and the badge shows how many tabs were refreshed. If the active tab is not in a group, nothing is reloaded.
+Open a grouped tab and click the extension icon. Reload every tab, copy every URL to the clipboard, or export one URL per line to a text file. If the active tab is not in a group, the actions are disabled.
 
 Features:
 
-- One-click reload for the active tab group
-- No setup or popup
-- No requested permissions
+- Reload every tab in the active group
+- Copy all grouped tab URLs
+- Export all grouped tab URLs to `tab-group-urls.txt`
+- One compact popup with no setup
+- Only the `tabs` permission; no host permissions
 - No tracking, analytics, ads, or network requests
-- Runs only when you click the toolbar icon
+- Runs only when you choose an action
 
 ## Single purpose
 
-Reload all tabs in the active tab group when the user clicks the extension icon.
+Manage the active tab group by reloading its tabs or copying/exporting its URLs.
+
+## Permission justification
+
+- **tabs:** Required to read the URLs of every tab in the active group for the user-requested Copy and Export actions. URLs are processed locally and never stored or transmitted.
 
 ## Privacy disclosures
 
-- Handles user data: **No**
+- Handles browsing activity: **Yes, locally, only for the requested Copy or Export action**
+- Collects or transmits user data: **No**
 - Sells or transfers user data: **No**
 - Uses data for purposes unrelated to the single purpose: **No**
 - Uses remote code: **No**

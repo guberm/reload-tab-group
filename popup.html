@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reload Tab Group</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    background: #f8fafc;
+    color: #0f172a;
+    font: 14px/1.4 system-ui, sans-serif;
+    margin: 0;
+    padding: 16px;
+    width: 300px;
+  }
+  header { align-items: center; display: flex; gap: 12px; margin-bottom: 14px; }
+  header img { height: 40px; width: 40px; }
+  h1 { font-size: 16px; margin: 0 0 2px; }
+  p { color: #64748b; font-size: 12px; margin: 0; }
+  main { display: grid; gap: 8px; }
+  button {
+    align-items: center;
+    background: #fff;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    color: #0f172a;
+    cursor: pointer;
+    display: flex;
+    font: inherit;
+    font-weight: 650;
+    gap: 10px;
+    padding: 11px 13px;
+    text-align: left;
+    width: 100%;
+  }
+  button:hover { background: #eff6ff; border-color: #60a5fa; }
+  button:focus-visible { outline: 3px solid #93c5fd; outline-offset: 1px; }
+  button:disabled { cursor: not-allowed; opacity: .5; }
+  button.primary { background: #2563eb; border-color: #2563eb; color: #fff; }
+  button.primary:hover { background: #1d4ed8; }
+  button span { font-size: 18px; line-height: 1; width: 20px; }
+</style>
+<header>
+  <img src="icons/icon48.png" alt="">
+  <div>
+    <h1>Reload Tab Group</h1>
+    <p id="status" role="status" aria-live="polite">Checking active group…</p>
+  </div>
+</header>
+<main>
+  <button id="reload" class="primary" type="button"><span>↻</span>Reload group</button>
+  <button id="copy" type="button"><span>⧉</span>Copy all URLs</button>
+  <button id="export" type="button"><span>↓</span>Export all URLs</button>
+</main>
+<script type="module" src="popup.js"></script>
+</html>
