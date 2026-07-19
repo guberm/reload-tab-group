@@ -9,7 +9,7 @@ Remove-Item -LiteralPath $archive -Force -ErrorAction SilentlyContinue
 
 Push-Location $root
 try {
-  Compress-Archive -LiteralPath 'manifest.json', 'background.js', 'icons' -DestinationPath $archive
+  Compress-Archive -LiteralPath 'manifest.json', 'popup.html', 'popup.js', 'icons' -DestinationPath $archive
 } finally {
   Pop-Location
 }

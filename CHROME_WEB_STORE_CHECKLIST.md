@@ -1,11 +1,11 @@
 # Chrome Web Store submission checklist
 
 1. Open the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole/).
-2. Create a new item and upload `dist/reload-tab-group-v1.0.0.zip`.
+2. Create a new item and upload `dist/reload-tab-group-v1.1.0.zip`.
 3. Copy the text from `STORE_LISTING.md`.
 4. Upload `icons/icon128.png` and `store-assets/screenshot-1280x800.png`.
 5. Select **Tools** and **English**.
-6. Complete the privacy form with the answers in `STORE_LISTING.md`.
+6. Complete the privacy form with the answers and `tabs` permission justification in `STORE_LISTING.md`.
 7. Confirm the extension contains no ads and uses no in-app purchases.
 8. Save the draft, run the dashboard checks, then submit for review.
 

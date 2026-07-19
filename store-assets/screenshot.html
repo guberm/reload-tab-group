@@ -11,7 +11,7 @@
   p { color: #475569; font-size: 28px; line-height: 1.4; margin: 0; }
   .badge { align-items: center; background: #dbeafe; border-radius: 999px; color: #1d4ed8; display: inline-flex; font-size: 18px; font-weight: 700; gap: 10px; margin-bottom: 28px; padding: 10px 16px; }
   .badge span { background: #2563eb; border-radius: 50%; height: 11px; width: 11px; }
-  .browser { background: white; border: 1px solid #bfdbfe; border-radius: 24px; box-shadow: 0 28px 65px #1e3a8a2b; overflow: hidden; transform: rotate(1.5deg); }
+  .browser { background: white; border: 1px solid #bfdbfe; border-radius: 24px; box-shadow: 0 28px 65px #1e3a8a2b; overflow: hidden; position: relative; transform: rotate(1.5deg); }
   .top { background: #dbeafe; padding: 20px 20px 0; }
   .tabs { display: flex; gap: 6px; }
   .tab { background: #bfdbfe; border-radius: 12px 12px 0 0; color: #1e3a8a; font-size: 16px; font-weight: 700; padding: 16px 20px; }
@@ -24,12 +24,20 @@
   .page { display: grid; min-height: 390px; place-items: center; padding: 54px; text-align: center; }
   .count { background: #eff6ff; border-radius: 24px; color: #1d4ed8; font-size: 70px; font-weight: 800; padding: 34px 46px; }
   .page strong { display: block; font-size: 27px; margin-top: 20px; }
+  .popup { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 16px; box-shadow: 0 20px 45px #0f172a30; padding: 16px; position: absolute; right: 20px; top: 118px; width: 285px; }
+  .popup-title { align-items: center; display: flex; gap: 10px; margin-bottom: 12px; text-align: left; }
+  .popup-title img { height: 38px; width: 38px; }
+  .popup-title b { display: block; font-size: 16px; }
+  .popup-title small { color: #64748b; font-size: 12px; }
+  .popup-button { align-items: center; background: white; border: 1px solid #cbd5e1; border-radius: 10px; display: flex; font-size: 14px; font-weight: 700; gap: 10px; margin-top: 8px; padding: 10px 12px; }
+  .popup-button.primary { background: #2563eb; border-color: #2563eb; color: white; }
+  .popup-button span { font-size: 18px; width: 20px; }
 </style>
 <main>
   <section>
-    <div class="badge"><span></span> One click. Zero permissions.</div>
-    <h1>Reload the whole tab group.</h1>
-    <p>Click the toolbar icon from any grouped tab. Every tab in that group refreshes instantly.</p>
+    <div class="badge"><span></span> Reload · Copy · Export</div>
+    <h1>Control the whole tab group.</h1>
+    <p>Reload every tab, copy every URL, or export the group to a text file.</p>
   </section>
   <section class="browser">
     <div class="top">
@@ -49,6 +57,15 @@
         <div class="count">3 ↻</div>
         <strong>tabs reloaded</strong>
       </div>
+    </div>
+    <div class="popup">
+      <div class="popup-title">
+        <img src="icon-source.svg" alt="">
+        <div><b>Reload Tab Group</b><small>3 tabs in this group</small></div>
+      </div>
+      <div class="popup-button primary"><span>↻</span>Reload group</div>
+      <div class="popup-button"><span>⧉</span>Copy all URLs</div>
+      <div class="popup-button"><span>↓</span>Export all URLs</div>
     </div>
   </section>
 </main>
