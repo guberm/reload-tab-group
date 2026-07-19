@@ -1,0 +1,9 @@
+{
+  "name": "reload-tab-group",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "package": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/package.ps1",
+    "test": "node --test"
+  }
+}
