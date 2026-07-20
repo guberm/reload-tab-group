@@ -1,18 +1,97 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { copyGroupUrls, exportGroupUrls, reloadGroup, setupPopup } from "../popup.js";
+import { copyGroupUrls, exportGroupUrls, getGroupTabs, reloadGroup, setupPopup } from "../popup.js";
 
 function chromeWithGroup(groupTabs) {
   return {
     tabs: {
-      async query(query) {
-        if (query.active) return [{ id: 11, groupId: 7 }];
-        return groupTabs;
+      async query() {
+        return groupTabs.map((tab, index) => ({
+          ...tab,
+          active: index === 0,
+          groupId: 7
+        }));
       }
     }
   };
 }
+
+test("group lookup uses one current-window query", async () => {
+  const queries = [];
+  const chromeApi = {
+    tabs: {
+      async query(query) {
+        queries.push(query);
+        return [
+          { id: 11, active: true, groupId: 7 },
+          { id: 12, active: false, groupId: 7 },
+          { id: 13, active: false, groupId: 9 }
+        ];
+      }
+    }
+  };
+
+  const tabs = await getGroupTabs(chromeApi);
+
+  assert.deepEqual(queries, [{ currentWindow: true }]);
+  assert.deepEqual(tabs.map((tab) => tab.id), [11, 12]);
+});
+
+test("popup actions are wired before group lookup finishes", () => {
+  const elements = Object.fromEntries(
+    ["reload", "copy", "export", "status"].map((id) => [id, {
+      addEventListener(type, listener) { this[type] = listener; },
+      disabled: false,
+      textContent: ""
+    }])
+  );
+  const documentApi = { getElementById(id) { return elements[id]; } };
+  const chromeApi = { tabs: { query: () => new Promise(() => {}) } };
+
+  setupPopup({ chromeApi, documentApi });
+
+  assert.equal(typeof elements.reload.click, "function");
+  assert.equal(typeof elements.copy.click, "function");
+  assert.equal(typeof elements.export.click, "function");
+});
+
+test("late group lookup does not overwrite action feedback", async () => {
+  const elements = Object.fromEntries(
+    ["reload", "copy", "export", "status"].map((id) => [id, {
+      addEventListener(type, listener) { this[type] = listener; },
+      disabled: false,
+      textContent: ""
+    }])
+  );
+  const documentApi = { getElementById(id) { return elements[id]; } };
+  let resolveInitialQuery;
+  let queryCount = 0;
+  const groupedTabs = [{ id: 11, active: true, groupId: 7, url: "https://example.com" }];
+  const chromeApi = {
+    tabs: {
+      query() {
+        queryCount += 1;
+        if (queryCount === 1) {
+          return new Promise((resolve) => { resolveInitialQuery = resolve; });
+        }
+        return Promise.resolve(groupedTabs);
+      }
+    }
+  };
+  let copiedText;
+  const clipboard = { async writeText(text) { copiedText = text; } };
+
+  const setup = setupPopup({ chromeApi, clipboard, documentApi });
+  await elements.copy.click();
+  assert.equal(copiedText, "https://example.com");
+  assert.equal(elements.status.textContent, "Copied 1 URLs");
+
+  resolveInitialQuery(groupedTabs);
+  await setup;
+
+  assert.equal(elements.status.textContent, "Copied 1 URLs");
+});
 
 test("copy all URLs writes every grouped tab URL to the clipboard", async () => {
   let copiedText;
