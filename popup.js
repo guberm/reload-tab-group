@@ -30,7 +30,7 @@ export async function exportGroupUrls(chromeApi = chrome, documentApi = document
   return urls.length;
 }
 
-export async function setupPopup({
+export function setupPopup({
   chromeApi = chrome,
   clipboard = navigator.clipboard,
   documentApi = document
@@ -39,10 +39,8 @@ export async function setupPopup({
   const copyButton = documentApi.getElementById("copy");
   const exportButton = documentApi.getElementById("export");
   const status = documentApi.getElementById("status");
-  let actionStarted = false;
 
   const run = async (action, success, failure) => {
-    actionStarted = true;
     try {
       status.textContent = success(await action());
     } catch {
@@ -56,16 +54,6 @@ export async function setupPopup({
     run(() => copyGroupUrls(chromeApi, clipboard), (count) => `Copied ${count} URLs`, "Copy failed"));
   exportButton.addEventListener("click", () =>
     run(() => exportGroupUrls(chromeApi, documentApi), (count) => `Exported ${count} URLs`, "Export failed"));
-
-  const tabs = await getGroupTabs(chromeApi);
-  for (const button of [reloadButton, copyButton, exportButton]) {
-    button.disabled = tabs.length === 0;
-  }
-  if (!actionStarted) {
-    status.textContent = tabs.length
-      ? `${tabs.length} tabs in this group`
-      : "This tab is not in a group";
-  }
 }
 
 if (typeof document !== "undefined") setupPopup();

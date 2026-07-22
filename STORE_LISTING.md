@@ -11,7 +11,7 @@
 
 Reload Tab Group gives you a fast, predictable way to manage every tab in the group you are currently using.
 
-Open a grouped tab and click the extension icon. Reload every tab, copy every URL to the clipboard, or export one URL per line to a text file. If the active tab is not in a group, the actions are disabled.
+Open a grouped tab and click the extension icon. Reload every tab, copy every URL to the clipboard, or export one URL per line to a text file. The active group is checked only after you choose an action, so the popup can open immediately.
 
 Features:
 
