@@ -1,7 +1,8 @@
 export async function getGroupTabs(chromeApi = chrome) {
-  const [activeTab] = await chromeApi.tabs.query({ active: true, currentWindow: true });
+  const windowTabs = await chromeApi.tabs.query({ currentWindow: true });
+  const activeTab = windowTabs.find((tab) => tab.active);
   if (!activeTab || activeTab.groupId === -1) return [];
-  return chromeApi.tabs.query({ groupId: activeTab.groupId });
+  return windowTabs.filter((tab) => tab.groupId === activeTab.groupId);
 }
 
 const urlsFrom = (tabs) => tabs.map((tab) => tab.url || tab.pendingUrl).filter(Boolean);
@@ -29,7 +30,7 @@ export async function exportGroupUrls(chromeApi = chrome, documentApi = document
   return urls.length;
 }
 
-export async function setupPopup({
+export function setupPopup({
   chromeApi = chrome,
   clipboard = navigator.clipboard,
   documentApi = document
@@ -38,14 +39,6 @@ export async function setupPopup({
   const copyButton = documentApi.getElementById("copy");
   const exportButton = documentApi.getElementById("export");
   const status = documentApi.getElementById("status");
-  const tabs = await getGroupTabs(chromeApi);
-
-  for (const button of [reloadButton, copyButton, exportButton]) {
-    button.disabled = tabs.length === 0;
-  }
-  status.textContent = tabs.length
-    ? `${tabs.length} tabs in this group`
-    : "This tab is not in a group";
 
   const run = async (action, success, failure) => {
     try {

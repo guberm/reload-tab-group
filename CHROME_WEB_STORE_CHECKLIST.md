@@ -1,7 +1,7 @@
 # Chrome Web Store submission checklist
 
 1. Open the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole/).
-2. Create a new item and upload `dist/reload-tab-group-v1.1.0.zip`.
+2. For this existing item, upload `dist/reload-tab-group-v1.1.2.zip` on the **Package** page.
 3. Copy the text from `STORE_LISTING.md`.
 4. Upload `icons/icon128.png` and `store-assets/screenshot-1280x800.png`.
 5. Select **Tools** and **English**.

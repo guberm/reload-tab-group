@@ -9,7 +9,7 @@ A tiny Chrome extension for reloading a tab group, copying all its URLs, or expo
 3. Click the extension icon.
 4. Choose **Reload group**, **Copy all URLs**, or **Export all URLs**.
 
-Export creates `tab-group-urls.txt` with one URL per line. Actions are disabled when the active tab is not grouped.
+Export creates `tab-group-urls.txt` with one URL per line. The popup opens without querying tabs; the active group is checked only after you choose an action.
 
 ## Privacy and permissions
 
